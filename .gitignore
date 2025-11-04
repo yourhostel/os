@@ -205,3 +205,54 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ======================
+# Vagrant
+# ======================
+.vagrant/
+*.box
+
+# Vagrant local override files
+Vagrantfile.local
+.vagrantfile.local
+
+# Libvirt / KVM disks
+*.qcow2
+*.img
+
+# ISO images
+*.iso
+
+# ======================
+# JetBrains IDE (PyCharm, CLion, IDEA etc.)
+# ======================
+.idea/
+*.iml
+out/
+
+# JetBrains caches
+# Warning: if you _want_ workspace settings tracked, remove these
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf/
+
+# User specific stuff
+.idea/**/gradle.xml
+.idea/**/libraries/
+
+# Sensitive or noisy
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/deployment.xml
+
+# JetBrains generated
+.idea/**/profiles_settings.xml
+.idea/**/androidProfiling.xml
+

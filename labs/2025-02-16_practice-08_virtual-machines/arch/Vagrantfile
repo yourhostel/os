@@ -1,0 +1,30 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "generic/arch"
+  config.vm.hostname = "arch-desktop"
+  config.vm.network "public_network", dev: <"ваш інтерфейс">
+
+  # GUI requirements
+  config.vm.provider :libvirt do |libvirt|
+    libvirt.memory = 4096
+    libvirt.cpus = 2
+    libvirt.storage :file, size: "25G"
+    libvirt.graphics_type = "spice"
+    libvirt.video_type = "qxl"
+  end
+
+  # Install GUI (XFCE замість Wayland бо Arch box мінімальний)
+config.vm.provision "shell", inline: <<-SHELL
+  # Fix keyring
+  pacman -Sy --noconfirm archlinux-keyring
+
+  # Full update after fixing keys
+  pacman -Syu --noconfirm
+
+  # Install GUI
+  pacman -S --noconfirm xorg-server xfce4 lightdm lightdm-gtk-greeter networkmanager
+
+  # Enable services
+  systemctl enable lightdm
+  systemctl enable NetworkManager
+SHELL
+end

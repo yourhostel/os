@@ -1,0 +1,21 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "generic/fedora38"
+  config.vm.hostname = "fedora-desktop"
+  config.vm.network "public_network", dev: <"ваш інтерфейс">
+
+  config.vm.provider :libvirt do |libvirt|
+    libvirt.memory = 4096
+    libvirt.cpus = 2
+    libvirt.storage :file, size: "25G"
+    libvirt.graphics_type = "spice"
+  end
+
+  # Install GNOME GUI for Fedora Workstation
+  config.vm.provision "shell", inline: <<-SHELL
+    set -eux
+    dnf -y update
+    dnf -y groupinstall "Fedora Workstation"
+    systemctl set-default graphical.target
+    systemctl enable gdm
+  SHELL
+end
